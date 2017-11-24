@@ -1,7 +1,9 @@
 package com.jeffpolasz.flappyclone.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +27,10 @@ public class PlayState extends State{
 
     private Array<Tube> tubes;
 
+    private int score = 0;
+    BitmapFont font;
+    boolean scoredPoint = false;
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 300);
@@ -33,6 +39,11 @@ public class PlayState extends State{
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth/2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth/2) + ground.getWidth(),GROUND_Y_OFFSET);
+
+        font = new BitmapFont();
+        font.setColor(Color.WHITE);
+        font.getData().setScale(1);
+        font.setUseIntegerPositions(false);
 
         tubes = new Array<Tube>();
 
@@ -58,8 +69,16 @@ public class PlayState extends State{
         for (int i=0; i < tubes.size; i++) {
             Tube tube = tubes.get(i);
 
+            if (cam.position.x - tube.getTopTube().getWidth() > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
+                if (scoredPoint == false) {
+                    score++;
+                    scoredPoint = true;
+                }
+            }
+
             if (cam.position.x - (cam.viewportWidth/2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                scoredPoint = false;
             }
 
             if (tube.collides(bird.getBounds())) {
@@ -83,6 +102,7 @@ public class PlayState extends State{
             sb.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             sb.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
         }
+        font.draw(sb, String.valueOf(score),cam.position.x,cam.viewportHeight-5);
         sb.draw(ground, groundPos1.x, groundPos1.y);
         sb.draw(ground, groundPos2.x, groundPos2.y);
         sb.end();
