@@ -3,10 +3,9 @@ package com.jeffpolasz.flappyclone;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.jeffpolasz.flappyclone.States.GameStateManager;
-import com.jeffpolasz.flappyclone.States.MenuState;
+import com.jeffpolasz.flappyclone.states.GameStateManager;
+import com.jeffpolasz.flappyclone.states.MenuState;
 
 public class FlappyClone extends ApplicationAdapter {
 	public static final int WIDTH = 480;
