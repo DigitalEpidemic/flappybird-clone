@@ -1,4 +1,4 @@
-package com.jeffpolasz.flappyclone.states;
+package com.jeffpolasz.flappyclone.States;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

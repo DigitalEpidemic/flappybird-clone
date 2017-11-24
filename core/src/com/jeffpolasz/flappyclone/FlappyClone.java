@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.jeffpolasz.flappyclone.states.GameStateManager;
-import com.jeffpolasz.flappyclone.states.MenuState;
+import com.jeffpolasz.flappyclone.States.GameStateManager;
+import com.jeffpolasz.flappyclone.States.MenuState;
 
 public class FlappyClone extends ApplicationAdapter {
 	public static final int WIDTH = 480;
