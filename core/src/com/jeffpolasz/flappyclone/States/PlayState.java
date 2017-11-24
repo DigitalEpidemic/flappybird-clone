@@ -1,6 +1,7 @@
 package com.jeffpolasz.flappyclone.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -34,6 +35,8 @@ public class PlayState extends State{
     float scoreWidth;
     boolean scoredPoint = false;
 
+    private Sound pointSound;
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 300);
@@ -42,6 +45,8 @@ public class PlayState extends State{
         ground = new Texture("ground.png");
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth/2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth/2) + ground.getWidth(),GROUND_Y_OFFSET);
+
+        pointSound = Gdx.audio.newSound(Gdx.files.internal("sfx_point.ogg"));
 
         font = new BitmapFont(Gdx.files.internal("font.fnt"));
 //        font.setColor(Color.WHITE);
@@ -76,6 +81,7 @@ public class PlayState extends State{
 
             if (cam.position.x - tube.getTopTube().getWidth() > tube.getPosTopTube().x + tube.getTopTube().getWidth()) {
                 if (scoredPoint == false) {
+                    pointSound.play(0.5f);
                     score++;
                     scoredPoint = true;
                 }
@@ -121,6 +127,8 @@ public class PlayState extends State{
         for (Tube tube : tubes) {
             tube.dispose();
         }
+        font.dispose();
+        pointSound.dispose();
         System.out.println("Play State Disposed");
     }
 
