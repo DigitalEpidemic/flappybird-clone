@@ -24,7 +24,7 @@ public class Bird {
         if (position.y > 0) {
             velocity.add(0, GRAVITY, 0);
         }
-        
+
         velocity.scl(dt);
         position.add(0,velocity.y,0);
 
