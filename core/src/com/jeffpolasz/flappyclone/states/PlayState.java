@@ -1,5 +1,6 @@
 package com.jeffpolasz.flappyclone.states;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jeffpolasz.flappyclone.FlappyClone;
@@ -14,13 +15,15 @@ public class PlayState extends State{
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        bird = new Bird(50, 100);
+        bird = new Bird(50, 300);
         cam.setToOrtho(false, FlappyClone.WIDTH/2, FlappyClone.HEIGHT/2);
     }
 
     @Override
     protected void handleInput() {
-
+        if (Gdx.input.justTouched()) {
+            bird.jump();
+        }
     }
 
     @Override
