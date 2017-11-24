@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -29,6 +30,8 @@ public class PlayState extends State{
 
     private int score = 0;
     BitmapFont font;
+    GlyphLayout layout;
+    float scoreWidth;
     boolean scoredPoint = false;
 
     public PlayState(GameStateManager gsm) {
@@ -40,9 +43,9 @@ public class PlayState extends State{
         groundPos1 = new Vector2(cam.position.x - cam.viewportWidth/2, GROUND_Y_OFFSET);
         groundPos2 = new Vector2((cam.position.x - cam.viewportWidth/2) + ground.getWidth(),GROUND_Y_OFFSET);
 
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
-        font.getData().setScale(1);
+        font = new BitmapFont(Gdx.files.internal("font.fnt"));
+//        font.setColor(Color.WHITE);
+        font.getData().setScale(0.5f);
         font.setUseIntegerPositions(false);
 
         tubes = new Array<Tube>();
@@ -65,6 +68,8 @@ public class PlayState extends State{
         updateGround();
         bird.update(dt);
         cam.position.x = bird.getPosition().x + 80;
+        GlyphLayout layout = new GlyphLayout(font, String.valueOf(score));
+        scoreWidth = layout.width;
 
         for (int i=0; i < tubes.size; i++) {
             Tube tube = tubes.get(i);
@@ -102,7 +107,7 @@ public class PlayState extends State{
             sb.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             sb.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
         }
-        font.draw(sb, String.valueOf(score),cam.position.x,cam.viewportHeight-5);
+        font.draw(sb, String.valueOf(score),cam.position.x - scoreWidth/2,cam.viewportHeight-5);
         sb.draw(ground, groundPos1.x, groundPos1.y);
         sb.draw(ground, groundPos2.x, groundPos2.y);
         sb.end();
