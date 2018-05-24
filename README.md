@@ -5,7 +5,7 @@ A side-scrolling mobile game featuring 2D retro style graphics. The objective is
 
 # Controls
 Control | Description
------- | ------
+------- | -----------
 TOUCH | Fly upwards
 
 # What Was Learned From This Game?
@@ -23,3 +23,8 @@ TOUCH | Fly upwards
 - Viewport Sizes
 - Buttons
 - Porting To Android
+
+# Screenshots
+Menu | Gameplay
+---- | --------
+<img src="/screenshots/Menu.jpg"> | <img src="/screenshots/Gameplay.jpg">
